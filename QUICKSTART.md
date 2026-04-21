@@ -107,37 +107,3 @@ MVPtodolist/
 pip install pytest
 pytest tests/
 ```
-
-## Próximos Passos
-
-- [ ] Adicionar autenticação (JWT)
-- [ ] Implementar paginação
-- [ ] Adicionar validação com Marshmallow
-- [ ] Deploy em produção
-- [ ] Documentação Swagger/OpenAPI
-- [ ] Cobertura de testes com coverage
-- [ ] CI/CD com GitHub Actions
-
-## Git
-
-```bash
-# Status
-git status
-
-# Ver commits
-git log --oneline
-
-# Criar branch
-git checkout -b feature/sua-feature
-
-# Push para remote
-git push origin main
-```
-
-## Suporte
-
-Para dúvidas ou problemas, consulte o [README.md](README.md) principal.
-
----
-
-**Desenvolvido com ❤️ usando Python, Flask e SQLite**

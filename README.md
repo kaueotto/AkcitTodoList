@@ -295,11 +295,6 @@ O projeto segue os padrões **PEP 8** para estilo de código Python:
 python -m pytest tests/
 ```
 
-### Gerar Requisitos
-```bash
-pip freeze > requirements.txt
-```
-
 ### Usando o Git
 
 ```bash
@@ -316,19 +311,6 @@ git commit -m "Initial commit: MVP To-Do List API"
 git checkout -b develop
 ```
 
-## Melhorias Futuras
-
-- [ ] Autenticação e autorização (JWT)
-- [ ] Paginação de resultados
-- [ ] Validação mais robusta com Marshmallow
-- [ ] Testes unitários e de integração
-- [ ] Deploy em produção (Heroku, AWS)
-- [ ] Documentação Swagger/OpenAPI
-- [ ] Logging estruturado
-- [ ] Rate limiting
-- [ ] Cache com Redis
-- [ ] Backup automático do banco de dados
-
 ## Licença
 
 Este projeto é livre para uso educacional e comercial.
@@ -342,7 +324,3 @@ Contribuições são bem-vindas! Por favor:
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
-
-## Contato
-
-Desenvolvido como MVP para aprendizado e prototipagem.
