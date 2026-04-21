@@ -47,6 +47,26 @@ class TestTasks:
 
         assert response.status_code == 400
 
+    def test_create_task_empty_title(self):
+        """Testa criação de tarefa com título vazio."""
+        response = self.client.post(
+            '/api/tasks',
+            data=json.dumps({'title': '', 'description': 'Título vazio'}),
+            content_type='application/json'
+        )
+
+        assert response.status_code == 400
+
+    def test_create_task_only_spaces_title(self):
+        """Testa criação de tarefa com título contendo apenas espaços."""
+        response = self.client.post(
+            '/api/tasks',
+            data=json.dumps({'title': '   ', 'description': 'Apenas espaços'}),
+            content_type='application/json'
+        )
+
+        assert response.status_code == 400
+
     def test_get_all_tasks(self):
         """Testa obtenção de todas as tarefas."""
         # Criar algumas tarefas
@@ -103,6 +123,31 @@ class TestTasks:
         assert data['title'] == 'Nova'
         assert data['status'] == 'completed'
 
+    def test_update_task_invalid_status(self):
+        """Testa atualização com status inválido."""
+        create_response = self.client.post(
+            '/api/tasks',
+            data=json.dumps({'title': 'Tarefa'}),
+            content_type='application/json'
+        )
+        task_id = json.loads(create_response.data)['id']
+
+        response = self.client.put(
+            f'/api/tasks/{task_id}',
+            data=json.dumps({'status': 'invalid_status'}),
+            content_type='application/json'
+        )
+
+        assert response.status_code == 400
+
+    def test_get_nonexistent_task(self):
+        """Testa obtenção de tarefa que não existe."""
+        response = self.client.get('/api/tasks/99999')
+
+        assert response.status_code == 404
+        data = json.loads(response.data)
+        assert 'error' in data
+
     def test_delete_task(self):
         """Testa deleção de uma tarefa."""
         create_response = self.client.post(
@@ -151,6 +196,14 @@ class TestTasks:
         data = json.loads(response.data)
         assert len(data) == 1
         assert data[0]['id'] == task_id_1
+
+    def test_filter_by_invalid_status(self):
+        """Testa filtro com status inválido."""
+        response = self.client.get('/api/tasks?status=invalid')
+
+        assert response.status_code == 400
+        data = json.loads(response.data)
+        assert 'error' in data
 
     def test_complete_task(self):
         """Testa marcação de tarefa como concluída."""
